@@ -1,0 +1,73 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class Home_model extends CI_Model {
+
+	/*
+		Desenvolvido por Wellington Pereira
+		Email: wtecnologia@outlook.com.br
+		Telefone: 21 98754 2212
+		Data de criação: 24/05/2017
+	*/
+	
+	public function getProducts(){
+		 $this->db->order_by('id', 'RANDOM');
+		return $this->db->get('products')->result();
+	}
+	
+	public function salvar(){					        
+		$field = array(
+			'nome_produto'	=>$this->input->post('produto'),
+			'preco'			=>str_replace(',','.', $this->input->post('preco')),
+			'quantidade'	=>$this->input->post('quantidade')
+			);
+		
+		$this->db->insert('products', $field);
+		
+		if($this->db->affected_rows() > 0){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public function getProductsById($id){	
+		$query = $this->db->get_where('products', array('id' => $id));		
+	
+		if($query->num_rows() > 0 ){
+			return $query->row();
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public function update(){
+		$id	= $this->input->post('txt_hidden');
+		
+		$field = array(
+			'nome_produto'	=>$this->input->post('produto'),
+			'preco'			=>str_replace(',','.', $this->input->post('preco')),
+			'quantidade'	=>$this->input->post('quantidade')
+			);
+		
+		$this->db->where('id', $id);		
+		$this->db->update('products', $field);
+		
+		if($this->db->affected_rows() > 0){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public function apagar($id){
+		$this->db->where('id', $id);		
+		$this->db->delete('products');
+		
+		if($this->db->affected_rows() > 0){
+			return true;
+		} else {
+			return false;
+		}
+	}
+}
