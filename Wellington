@@ -1,0 +1,62 @@
+<!--
+	Desenvolvido por Wellington Pereira
+	Email: wtecnologia@outlook.com.br
+	Telefone: 21 98754 2212
+	Data de criação: 24/05/2017
+-->
+
+<style type="text/css">
+th, a, td{
+	font-family:verdana;
+}
+
+a:hover{
+	color:red;
+}
+
+h1{
+	color:red
+}
+</style>	
+
+<h1>Listar Produtos</h1> <h4>Teste: Wellington Pereira</h4>
+<hr>
+
+<br><br>
+<?php echo anchor ("home/create",'Adicionar'); ?>
+<br><br>
+
+<div>
+
+	<table border='1'>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nome Produto</th>
+				<th>Preço</th>
+				<th>Quantidade</th>
+				<th>Operação</th>
+			</tr>
+
+		</thead>
+
+		<tbody>
+			<?php if(count ($resultado) ) : 
+				foreach($resultado as $obj){ ?>
+					<tr>
+						<td><?php echo $obj->id; ?></td>
+						<td><?php echo $obj->nome_produto; ?></td>
+						<td><?php echo $obj->preco; ?></td>
+						<td><?php echo $obj->quantidade; ?></td>
+						<td><a href="<?php echo base_url('index.php/home/edit/'.$obj->id); ?>">Atualizar</a> |					
+							<a href="<?php echo base_url('index.php/home/apagar/'.$obj->id); ?>" onclick="return confirm('Você deseja apagar este produto?');">Apagar</a>
+						</td>
+					</tr>
+			<?php } ?>
+			<?php else: ?>
+				<tr>Não exite registro</tr>
+			<?php endif; ?>
+			
+		</tbody>
+	</table>
+</div>
