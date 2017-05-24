@@ -1,0 +1,77 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class Home extends CI_Controller {
+
+	/*
+		Desenvolvido por Wellington Pereira
+		Email: wtecnologia@outlook.com.br
+		Telefone: 21 98754 2212
+		Data de criação: 24/05/2017
+	*/
+	
+	public function index()
+	{header('Refresh: 1800');
+		//Invocar model para dentro da classe
+		$this->load->model('home_model');
+		
+		//Invocar o método
+		$retorno = $this->home_model->getProducts();
+		
+		//print_r($retorno);
+		
+		$this->load->view('home_view', array('resultado'=>$retorno));
+	}
+	
+	public function create(){
+		$this->load->view('create');		
+	}
+	
+	public function submit(){
+		//Invocar model para dentro da classe
+		$this->load->model('home_model');
+		$result = $this->home_model->salvar();
+					
+		if($result){	
+			redirect(base_url('index.php/home/index'));
+		} else {			
+			redirect(base_url('index.php/home/erro'));			
+		}		
+	}
+	
+	public function edit($id){		
+		$this->load->model('home_model');
+		$retorno = $this->home_model->getProductsById($id);
+		if($retorno){
+			$this->load->view('edit', array('resultado'=>$retorno));	
+		}
+		else{
+			redirect(base_url('index.php/home/erro'));				
+		}
+	}
+	
+	public function update(){
+		$this->load->model('home_model');
+		$result = $this->home_model->update();
+		
+		if($result){	
+			redirect(base_url('index.php/home/index'));
+		} else {			
+			redirect(base_url('index.php/home/erro'));			
+		}		
+	}
+	
+	public function apagar($id){
+		$this->load->model('home_model');
+		$result = $this->home_model->apagar($id);
+					
+		if($result){	
+			redirect(base_url('index.php/home/index'));
+		} else {			
+			redirect(base_url('index.php/home/erro'));			
+		}	
+	}
+	
+	public function erro(){
+		$this->load->view('erro');	
+	}
+}
