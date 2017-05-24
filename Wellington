@@ -1,0 +1,67 @@
+<!--
+	Desenvolvido por Wellington Pereira
+	Email: wtecnologia@outlook.com.br
+	Telefone: 21 98754 2212
+	Data de criação: 24/05/2017
+-->
+
+<style type="text/css">
+th, a, td, legend{
+	font-family:verdana;
+}
+
+a:hover{
+	color:red;
+}
+
+h1{
+	color:red
+}
+p{
+	font-family:verdana;
+	font-weight:bold;
+}
+
+button{
+	color:blue;
+	width:100px;
+	height:30px;
+}
+
+button:hover{
+	color:red;
+}
+</style>	
+
+<script type="text/javascript" language="javascript">
+    function moeda(z) {
+        v = z.value;
+        v = v.replace(/\D/g, "")  //permite digitar apenas números
+        v = v.replace(/[0-9]{12}/, "inválido")   //limita pra máximo 999.999.999,99
+        //v = v.replace(/(\d{1})(\d{8})$/, "$1.$2")  //coloca ponto antes dos últimos 8 digitos
+        //v = v.replace(/(\d{1})(\d{5})$/, "$1.$2")  //coloca ponto antes dos últimos 5 digitos
+        v = v.replace(/(\d{1})(\d{1,2})$/, "$1,$2")	//coloca virgula antes dos últimos 2 digitos
+        z.value = v;
+    }
+</script>
+
+<h1>Adicionar Produto</h1>
+<hr>
+<br><br>
+
+<form action="<?php echo base_url('index.php/home/submit') ?>" method="post" >
+	<fieldset>
+		<legend>Cadastro de produtos</legend>
+		<br>
+		<p>Nome do Produto</p> <input type="text" name="produto" placeholder="Informe o nome do produto" size="80px">
+		<p>Valor</p> <input type="text" name="preco" placeholder="Informe o valor do produto" size="20px" onKeyUp="moeda(this);">
+		<p>Quantidade</p> <input type="text" name="quantidade" placeholder="Informe a quantidade do produto" size="25px">
+		<br><br><br>
+		<button type="submit">Salvar</button>
+		
+		<br><br>
+		<div align="center">
+		<a href="<?php echo base_url('index.php/home/index'); ?>">Retornar para lista de produtos</a>		
+		</div>
+	</fieldset>
+</form>
