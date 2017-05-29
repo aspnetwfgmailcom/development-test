@@ -60,3 +60,353 @@ h1{
 		</tbody>
 	</table>
 </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>404 Page Not Found</title>
+<style type="text/css">
+
+::selection{ background-color: #E13300; color: white; }
+::moz-selection{ background-color: #E13300; color: white; }
+::webkit-selection{ background-color: #E13300; color: white; }
+
+body {
+	background-color: #fff;
+	margin: 40px;
+	font: 13px/20px normal Helvetica, Arial, sans-serif;
+	color: #4F5155;
+}
+
+a {
+	color: #003399;
+	background-color: transparent;
+	font-weight: normal;
+}
+
+h1 {
+	color: red;
+	background-color: transparent;
+	border-bottom: 1px solid #D0D0D0;
+	font-size: 19px;
+	font-weight: normal;
+	margin: 0 0 14px 0;
+	padding: 14px 15px 10px 15px;
+}
+
+code {
+	font-family: Consolas, Monaco, Courier New, Courier, monospace;
+	font-size: 12px;
+	background-color: #f9f9f9;
+	border: 1px solid #D0D0D0;
+	color: #002166;
+	display: block;
+	margin: 14px 0 14px 0;
+	padding: 12px 10px 12px 10px;
+}
+
+#container {
+	margin: 10px;
+	border: 1px solid #D0D0D0;
+	-webkit-box-shadow: 0 0 8px #D0D0D0;
+}
+
+p {
+	margin: 12px 15px 12px 15px;
+}
+</style>
+</head>
+<body align="center">
+	<div id="container">
+		<h1>Desculpe aconteceu alguma falha. Entre em contato com a pessoa responsável!</h1>
+		<br><br>
+		<?php echo anchor ("home/index",'Retornar para lista de produtos'); ?>
+	</div>
+</body>
+</html>
+<!--
+	Desenvolvido por Wellington Pereira
+	Email: wtecnologia@outlook.com.br
+	Telefone: 21 98754 2212
+	Data de criação: 24/05/2017
+-->
+
+<style type="text/css">
+th, a, td, legend{
+	font-family:verdana;
+}
+
+a:hover{
+	color:red;
+}
+
+h1{
+	color:red
+}
+p{
+	font-family:verdana;
+	font-weight:bold;
+}
+
+button{
+	color:blue;
+	width:100px;
+	height:30px;
+}
+
+button:hover{
+	color:red;
+}
+</style>	
+
+<script type="text/javascript" language="javascript">
+    function moeda(z) {
+        v = z.value;
+        v = v.replace(/\D/g, "")  //permite digitar apenas números
+        v = v.replace(/[0-9]{12}/, "inválido")   //limita pra máximo 999.999.999,99
+        //v = v.replace(/(\d{1})(\d{8})$/, "$1.$2")  //coloca ponto antes dos últimos 8 digitos
+        //v = v.replace(/(\d{1})(\d{5})$/, "$1.$2")  //coloca ponto antes dos últimos 5 digitos
+        v = v.replace(/(\d{1})(\d{1,2})$/, "$1,$2")	//coloca virgula antes dos últimos 2 digitos
+        z.value = v;
+    }
+</script>
+
+<h1>Adicionar Produto</h1>
+<hr>
+<br><br>
+
+<form action="<?php echo base_url('index.php/home/submit') ?>" method="post" >
+	<fieldset>
+		<legend>Cadastro de produtos</legend>
+		<br>
+		<p>Nome do Produto</p> <input type="text" name="produto" placeholder="Informe o nome do produto" size="80px">
+		<p>Valor</p> <input type="text" name="preco" placeholder="Informe o valor do produto" size="20px" onKeyUp="moeda(this);">
+		<p>Quantidade</p> <input type="text" name="quantidade" placeholder="Informe a quantidade do produto" size="25px">
+		<br><br><br>
+		<button type="submit">Salvar</button>
+		
+		<br><br>
+		<div align="center">
+		<a href="<?php echo base_url('index.php/home/index'); ?>">Retornar para lista de produtos</a>		
+		</div>
+	</fieldset>
+</form>
+<!--
+	Desenvolvido por Wellington Pereira
+	Email: wtecnologia@outlook.com.br
+	Telefone: 21 98754 2212
+	Data de criação: 24/05/2017
+-->
+
+<style type="text/css">
+th, a, td, legend{
+	font-family:verdana;
+}
+
+a:hover{
+	color:red;
+}
+
+h1{
+	color:red;
+}
+p{
+	font-family:verdana;
+	font-weight:bold;
+}
+
+button{
+	color:blue;
+	width:100px;
+	height:30px;
+}
+
+button:hover{
+	color:red;
+}
+
+</style>	
+
+<script type="text/javascript" language="javascript">
+    function moeda(z) {
+        v = z.value;
+        v = v.replace(/\D/g, "")  //permite digitar apenas números
+        v = v.replace(/[0-9]{12}/, "inválido")   //limita pra máximo 999.999.999,99
+        //v = v.replace(/(\d{1})(\d{8})$/, "$1.$2")  //coloca ponto antes dos últimos 8 digitos
+        //v = v.replace(/(\d{1})(\d{5})$/, "$1.$2")  //coloca ponto antes dos últimos 5 digitos
+        v = v.replace(/(\d{1})(\d{1,2})$/, "$1,$2")	//coloca virgula antes dos últimos 2 digitos
+        z.value = v;
+    }
+</script>
+
+<h1>Alterar Produto</h1>
+<hr>
+<br><br>
+
+<form action="<?php echo base_url('index.php/home/update') ?>" method="post" >
+	<fieldset>
+		<legend>Alterar cadastro de produtos</legend>
+		<br>
+		<input type="hidden" name="txt_hidden" value="<?php echo $resultado->id; ?>">
+		<p>Nome do Produto</p> <input type="text" value="<?php echo $resultado->nome_produto; ?>" name="produto" placeholder="Informe o nome do produto" size="80px">
+		<p>Valor</p> <input type="text" value="<?php echo $resultado->preco; ?>" name="preco" placeholder="Informe o valor do produto" size="20px" onKeyUp="moeda(this);">
+		<p>Quantidade</p> <input type="text" value="<?php echo $resultado->quantidade; ?>" name="quantidade" placeholder="Informe a quantidade do produto" size="25px">
+		<br><br><br>
+		<button type="submit">Salvar</button>
+		
+		<br><br>
+		<div align="center">
+		<a href="<?php echo base_url('index.php/home/index'); ?>">Retornar para lista de produtos</a>		
+		</div>
+	</fieldset>
+</form>
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class Home_model extends CI_Model {
+
+	/*
+		Desenvolvido por Wellington Pereira
+		Email: wtecnologia@outlook.com.br
+		Telefone: 21 98754 2212
+		Data de criação: 24/05/2017
+	*/
+	
+	public function getProducts(){
+		 $this->db->order_by('id', 'RANDOM');
+		return $this->db->get('products')->result();
+	}
+	
+	public function salvar(){					        
+		$field = array(
+			'nome_produto'	=>$this->input->post('produto'),
+			'preco'			=>str_replace(',','.', $this->input->post('preco')),
+			'quantidade'	=>$this->input->post('quantidade')
+			);
+		
+		$this->db->insert('products', $field);
+		
+		if($this->db->affected_rows() > 0){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public function getProductsById($id){	
+		$query = $this->db->get_where('products', array('id' => $id));		
+	
+		if($query->num_rows() > 0 ){
+			return $query->row();
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public function update(){
+		$id	= $this->input->post('txt_hidden');
+		
+		$field = array(
+			'nome_produto'	=>$this->input->post('produto'),
+			'preco'			=>str_replace(',','.', $this->input->post('preco')),
+			'quantidade'	=>$this->input->post('quantidade')
+			);
+		
+		$this->db->where('id', $id);		
+		$this->db->update('products', $field);
+		
+		if($this->db->affected_rows() > 0){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public function apagar($id){
+		$this->db->where('id', $id);		
+		$this->db->delete('products');
+		
+		if($this->db->affected_rows() > 0){
+			return true;
+		} else {
+			return false;
+		}
+	}
+}
+
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class Home extends CI_Controller {
+
+	/*
+		Desenvolvido por Wellington Pereira
+		Email: wtecnologia@outlook.com.br
+		Telefone: 21 98754 2212
+		Data de criação: 24/05/2017
+	*/
+	
+	public function index()
+	{header('Refresh: 1800');
+		//Invocar model para dentro da classe
+		$this->load->model('home_model');
+		
+		//Invocar o método
+		$retorno = $this->home_model->getProducts();
+		
+		//print_r($retorno);
+		
+		$this->load->view('home_view', array('resultado'=>$retorno));
+	}
+	
+	public function create(){
+		$this->load->view('create');		
+	}
+	
+	public function submit(){
+		//Invocar model para dentro da classe
+		$this->load->model('home_model');
+		$result = $this->home_model->salvar();
+					
+		if($result){	
+			redirect(base_url('index.php/home/index'));
+		} else {			
+			redirect(base_url('index.php/home/erro'));			
+		}		
+	}
+	
+	public function edit($id){		
+		$this->load->model('home_model');
+		$retorno = $this->home_model->getProductsById($id);
+		if($retorno){
+			$this->load->view('edit', array('resultado'=>$retorno));	
+		}
+		else{
+			redirect(base_url('index.php/home/erro'));				
+		}
+	}
+	
+	public function update(){
+		$this->load->model('home_model');
+		$result = $this->home_model->update();
+		
+		if($result){	
+			redirect(base_url('index.php/home/index'));
+		} else {			
+			redirect(base_url('index.php/home/erro'));			
+		}		
+	}
+	
+	public function apagar($id){
+		$this->load->model('home_model');
+		$result = $this->home_model->apagar($id);
+					
+		if($result){	
+			redirect(base_url('index.php/home/index'));
+		} else {			
+			redirect(base_url('index.php/home/erro'));			
+		}	
+	}
+	
+	public function erro(){
+		$this->load->view('erro');	
+	}
+}
